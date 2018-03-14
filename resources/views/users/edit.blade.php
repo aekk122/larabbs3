@@ -12,6 +12,8 @@
 
         <div class="panel-body">
 
+            @include('common.error')
+        
             <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8">
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
