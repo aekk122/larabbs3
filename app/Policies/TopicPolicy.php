@@ -10,11 +10,13 @@ class TopicPolicy extends Policy
     public function update(User $currentUser, Topic $topic)
     {
         // return $topic->user_id == $user->id;
-        return $currentUser->id === $topic->user_id;
+        return $currentUser->isAuthorOf($topic);
     }
 
     public function destroy(User $currentUser, Topic $topic)
     {
-        return $currentUser->id === $topic->user_id;
+        return $currentUser->isAuthorOf($topic);
     }
+
+
 }
