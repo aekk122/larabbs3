@@ -55,10 +55,10 @@ class ImageUploadHandler {
 		$image = Image::make($file_path);
 
 		// 进行大小裁剪
-		$image->resize($max_width, 362, function($constraint) {
+		$image->resize($max_width, null, function($constraint) {
 
 			// 设定宽度是 $max_width, 高度等比例双方缩放
-			
+			$constraint->aspectRatio();
 
 			// 防止裁图时图片尺寸变大
 			$constraint->upsize();
