@@ -50,7 +50,7 @@
                         <i class="glyphicon glyphicon-edit"></i> 编辑
                     </a>
                     
-                    <form action="{{ route('topics.destroy', $topic->id) }}" method="POST">
+                    <form action="{{ route('topics.destroy', $topic->id) }}" >
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button class="btn btn-default btn-xs pull-left" style="margin-left: 6px" type="submit" >
@@ -68,7 +68,7 @@
         <div class="panel panel-default topic-reply">
             <div class="panel-body">
                 @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic] )
-                @include('topics._reply_list', ['replies' => $topic->hasManyReplies()->with('belongsToUser')->get()])
+                @include('topics._reply_list', ['replies' => $topic->hasManyReplies()->with('belongsToUser', 'belongsToTopic')->get()])
             </div>
         </div>
     </div>
