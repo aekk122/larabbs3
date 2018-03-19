@@ -59,4 +59,26 @@ class User extends Authenticatable
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+
+
+    public function setPasswordAttribute($password) {
+
+        // 如果值的长度等于 60，则 不需要加密
+        if (strlen($password) != 60) {
+            // 不等于 60 ，进行加密
+            $password = bcrypt($password);
+        }
+
+        $this->attributes['password'] = $password;
+    }
+
+    public function setAvatarAttribute($avatar) {
+        // 如果值不是 http 开头，则修改
+        if ( !starts_with($avatar, 'http')) {
+            // 拼接完整的 URL
+            $avatar = config('app.url') . '/uploads/images/avatars/' . $avatar;
+        }
+
+        $this->attributes['avatar'] = $avatar;
+    }
 }
