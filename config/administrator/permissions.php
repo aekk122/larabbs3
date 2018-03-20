@@ -7,8 +7,8 @@ return [
 	'single' => '权限',
 	'model' => Permission::class,
 
-	'permissions' => function () {
-		return Auth::user()->can('manage_users');
+	'permission' => function () {
+		return Auth::user()->hasRole('Founder');
 	},
 
 	// 对 CRUD 动作的单独权限控制，通过返回布尔值来控制权限
