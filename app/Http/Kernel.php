@@ -13,6 +13,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+
+    // 全局中间件，最先调用
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -26,7 +28,9 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    // 定义中间件组
     protected $middlewareGroups = [
+        // web 中间件组，应用于 routes/web.php 路由文件
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -35,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\RecordLastActiveTime::class,
         ],
 
         'api' => [
